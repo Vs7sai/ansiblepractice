@@ -1,0 +1,27 @@
+- name: installing nginx
+  hosts: all
+  become: yes 
+  become_user: root # <--- ADD THIS LINE!
+ 
+  tasks:
+    # 1. TASK: Install NGINX using apt
+    - name: Install NGINX using apt
+      ansible.builtin.apt: 
+        name: nginx
+        state: latest
+        update_cache: yes
+      when: ansible_os_family == "Debian"
+
+    # 2. TASK: Install NGINX using yum
+    - name: Install NGINX using yum
+      ansible.builtin.yum: 
+        name: nginx
+        state: latest
+      when: ansible_os_family == "RedHat"
+      
+    # 3. TASK: apache started
+    - name: Ensure NGINX service is started
+      ansible.builtin.service:
+        name: nginx
+        state: started
+        enabled: yes

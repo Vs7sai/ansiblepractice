@@ -1,0 +1,8 @@
+- name: intro to ansible
+  hosts: all
+  
+
+  tasks:
+    - name: ping
+      ping:
+      
