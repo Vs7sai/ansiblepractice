@@ -1,7 +1,10 @@
+#!/Users/vamsisai/ansible/playbooks
 - name: installing nginx
+
   hosts: all
   become: yes 
   become_user: root # <--- ADD THIS LINE!
+  remote_user: ansible
  
   tasks:
     # 1. TASK: Install NGINX using apt
@@ -24,5 +27,5 @@
       ansible.builtin.service:
         name: nginx
         state: absent
-        
+
         enabled: yes
